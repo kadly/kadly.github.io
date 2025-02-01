@@ -44,14 +44,7 @@ const IndexPage = () => {
         <h2>Zoomlion</h2>
         <ContactInfo>
           <p>г. Новосибирск</p>
-          <p>
-          <ContactItem>
-            <a href="tel:+7-923-708-22-54">+7-923-708-22-54</a>
-          </ContactItem>
-            <StyledLink href="https://t.me/gmitry">
-              <TelegramLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png" alt="Telegram logo"/>
-            </StyledLink>
-          </p>
+          <p>+7-923-708-22-54</p>
         </ContactInfo>
       </Header>
       <Container>
@@ -75,45 +68,38 @@ const IndexPage = () => {
         </Grid>
       </Container>
       <Footer>
-        <p>&copy; {new Date().getFullYear()} Зумлион индустри. 25 лет на рынке в мире</p>
+        <p>&copy; {new Date().getFullYear()} Краны и спецтехника. Все права защищены.</p>
       </Footer>
     </>
   );
 };
 
-{/*export default IndexPage;*/}
+export default IndexPage;
 
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  /*background: #333;*/
-  background: linear-gradient(to right, #333 85%, #666);
+  background: #333;
   color: white;
 
   h1 {
     margin: 0;
     font-size: 24px;
   }
-  
-  a {
-    text-decoration: none;
-    color: black;
-  }
 
-  h2 {
+   h2 {
     margin: 0;
-    font-size: 56px; /* Увеличиваем размер текста для большей заметности */
-    color: #006f3d; /* Zoomlion фирменный зелёный */
-    font-weight: bold; /* Жирное начертание для силы бренда */
+    font-size: 56px;
+    color: #006f3d;
+    font-weight: bold;
     margin-left: 10px;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.5); /* Лёгкая белая тень для контраста */
-    -webkit-text-stroke: 1px #fff; /* Тонкий белый контур */
-    letter-spacing: 2px; /* Расстояние между буквами */
-
-  /* Анимация появления */
-  animation: fadeIn 1s ease-in-out;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.5);
+    -webkit-text-stroke: 1px #fff;
+    letter-spacing: 2px;
+    animation: fadeIn 1s ease-in-out;
+  }
 
   @keyframes fadeIn {
     from {
@@ -129,20 +115,8 @@ const Header = styled.header`
 
 const ContactInfo = styled.div`
   text-align: right;
-  font-size: 20px;
-  font-weight: bold;
-  color: #00c851; /* Яркий, но не кислотный */
-  text-shadow: 0 0 10px rgba(0, 200, 81, 0.7);
-  letter-spacing: 1px;
-  padding: 5px 15px;
-  /*background: rgba(255, 255, 255, 0.1); /* Лёгкая подложка для выделения */*/
-  border-radius: 8px;
-
-  p {
-    margin: 5px 0;
-  }
+  font-size: 14px;
 `;
-
 
 const Footer = styled.footer`
   text-align: center;
@@ -208,35 +182,3 @@ const Placeholder = styled.div`
   color: #888;
   font-size: 14px;
 `;
-
-const TelegramLogo = styled.img`
-  height: 40px;
-  width: 40px;
-  margin-left: 10px;
-  vertical-align: middle;
-  transition: transform 0.3s ease; // For subtle animation on hover
-  &:hover {
-    transform: scale(1.1); // Slightly enlarge on hover for visual feedback
-  }
-`;
-
-const StyledLink = styled.a`
-  text-decoration: none;
-  display: inline-block;
-  vertical-align: middle;
-`;
-
-const ContactItem = styled.span`
-  & > a {
-    transition: transform 0.3s ease, color 0.3s ease; // Transition for both scaling and color change
-    display: inline-block; // Ensure the anchor can be scaled
-    color: #00c851; // Green color for the phone number
-
-    &:hover {
-      transform: scale(1.02); // Scale up on hover
-      //color: #009e45; // A darker green on hover for subtle emphasis
-    }
-  }
-`;
-
-export default IndexPage;
