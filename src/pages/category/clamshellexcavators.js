@@ -8,7 +8,7 @@ import Header, { Head as HeaderHead } from '../../components/Header';
 import Footer from '../../components/Footer';
 import { Layout, Container, Grid, Subtitle } from '../../components/LayoutComponents';
 
-const BulldozersPage = ({ data }) => {
+const ClamshellexcavatorsPage = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedModel, setSelectedModel] = useState(null);
 
@@ -44,7 +44,7 @@ const BulldozersPage = ({ data }) => {
 
   return (
     <Layout>
-      <Header centerText="Бульдозеры" />
+      <Header centerText="Грейферные экскаваторы" />
 
       <Container>
         <Grid>
@@ -78,7 +78,7 @@ const BulldozersPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    images: allFile(filter: { relativeDirectory: { eq: "bulldozers" } }) {
+    images: allFile(filter: { relativeDirectory: { eq: "clamshellexcavators" } }) {
       edges {
         node {
           name
@@ -88,7 +88,7 @@ export const query = graphql`
         }
       }
     }
-    models: allBulldozersJson {
+    models: allClamshellexcavatorsJson {
       edges {
         node {
           modelId
@@ -103,6 +103,6 @@ export const query = graphql`
   }
 `;
 
-export default BulldozersPage;
+export default ClamshellexcavatorsPage;
 
 export const Head = HeaderHead;

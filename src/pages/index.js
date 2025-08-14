@@ -3,19 +3,21 @@ import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
+import Footer from "../components/Footer";
+import YandexMap from "../components/YandexMap";
 
 const categories = [
   { name: "Автокраны", image: "autocranes.png", description: "Мобильные краны для строительства.", path: "/category/autocranes" },
-  { name: "Автокраны полноприводные", image: "all-terrain-cranes.png", description: "Краны для работы в сложных условиях.", path: "/category/all-terrain-cranes" },
-  { name: "Краны короткобазные", image: "short-base-cranes.png", description: "Компактные краны для узких пространств.", path: "/category/short-base-cranes" },
-  { name: "Краны гусеничные", image: "crawler-cranes.png", description: "Гусеничные краны для тяжелых работ.", path: "/category/crawler-cranes" },
-  { name: "Краны гусеничные с телескопической стрелой", image: "telescopic-crawler-cranes.png", description: "Гибкие решения для строительства.", path: "/category/telescopic-crawler-cranes" },
+  { name: "Автокраны полноприводные", image: "all-terrain-cranes.png", description: "Краны для работы в сложных условиях.", path: "/category/allterraincranes" },
+  { name: "Краны короткобазные", image: "short-base-cranes.png", description: "Компактные краны для узких пространств.", path: "/category/shortbasecranes" },
+  { name: "Краны гусеничные", image: "crawler-cranes.png", description: "Гусеничные краны для тяжелых работ.", path: "/category/crawlercranes" },
+  { name: "Краны гусеничные с телескопической стрелой", image: "telescopic-crawler-cranes.png", description: "Гибкие решения для строительства.", path: "/category/telescopiccrawlercranes" },
   { name: "Манипуляторы", image: "manipulators.png", description: "Многофункциональные манипуляторы.", path: "/category/manipulators" },
-  { name: "Минипогрузчики", image: "skid-steer-loaders.png", description: "Компактные погрузчики для небольших задач.", path: "/category/skid-steer-loaders" },
+  { name: "Минипогрузчики", image: "skid-steer-loaders.png", description: "Компактные погрузчики для небольших задач.", path: "/category/skidsteerloaders" },
   { name: "Экскаваторы", image: "excavators.png", description: "Экскаваторы для копательных работ.", path: "/category/excavators" },
-  { name: "Экскаватор грейферный", image: "clamshell-excavators.png", description: "Грейферные экскаваторы для точных операций.", path: "/category/clamshell-excavators" },
+  { name: "Экскаватор грейферный", image: "clamshell-excavators.png", description: "Грейферные экскаваторы для точных операций.", path: "/category/clamshellexcavators" },
   { name: "Бульдозеры", image: "bulldozers.png", description: "Тяжелая техника для землеройных работ.", path: "/category/bulldozers" },
-  { name: "Фронтальные погрузчики", image: "front-end-loaders.png", description: "Погрузчики для перемещения материалов.", path: "/category/front-end-loaders" },
+  { name: "Фронтальные погрузчики", image: "front-end-loaders.png", description: "Погрузчики для перемещения материалов.", path: "/category/frontendloaders" },
 ];
 
 const IndexPage = () => {
@@ -45,17 +47,19 @@ const IndexPage = () => {
         <ContactInfo>
           <p>г. Новосибирск</p>
           <p>
-          <ContactItem>
-            <a href="tel:+7-923-708-22-54">+7-923-708-22-54</a>
-          </ContactItem>
+            <ContactItem>
+              <a href="tel:+7-923-708-22-54">+7-923-708-22-54</a>
+            </ContactItem>
             <StyledLink href="https://t.me/gmitry">
-              <TelegramLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png" alt="Telegram logo"/>
+              <TelegramLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png" alt="Telegram logo" />
+            </StyledLink>
+            <StyledLink href="https://wa.me/79237082254" target="_blank" rel="noopener noreferrer">
+              <WhatsappLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" alt="WhatsApp logo" />
             </StyledLink>
           </p>
         </ContactInfo>
       </Header>
       <Container>
-        {/*<h2>Каталог техники</h2>*/}
         <Grid>
           {categories.map((category) => (
             <Card key={category.name}>
@@ -74,27 +78,33 @@ const IndexPage = () => {
           ))}
         </Grid>
       </Container>
-      <Footer>
-        <p>&copy; {new Date().getFullYear()} Зумлион индустри. 25 лет на рынке в мире</p>
-      </Footer>
+      <YandexMap />
+      <Footer
+        companyName="Зумлион Индустри"
+        websiteUrl="https://example.com"
+      />
     </>
   );
 };
 
-{/*export default IndexPage;*/}
+export default IndexPage;
 
 const Header = styled.header`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  /*background: #333;*/
+  padding: 10px 20px;
   background: linear-gradient(to right, #333 85%, #666);
   color: white;
 
   h1 {
     margin: 0;
     font-size: 24px;
+
+    @media (max-width: 480px) {
+      font-size: 20px;
+    }
   }
   
   a {
@@ -104,64 +114,86 @@ const Header = styled.header`
 
   h2 {
     margin: 0;
-    font-size: 56px; /* Увеличиваем размер текста для большей заметности */
-    color: #006f3d; /* Zoomlion фирменный зелёный */
-    font-weight: bold; /* Жирное начертание для силы бренда */
+    font-size: 56px;
+    color: #006f3d;
+    font-weight: bold;
     margin-left: 10px;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.5); /* Лёгкая белая тень для контраста */
-    -webkit-text-stroke: 1px #fff; /* Тонкий белый контур */
-    letter-spacing: 2px; /* Расстояние между буквами */
-
-  /* Анимация появления */
-  animation: fadeIn 1s ease-in-out;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
+    letter-spacing: 2px;
+    text-shadow: 
+      -1px -1px 0 #fff,
+       1px -1px 0 #fff,
+      -1px  1px 0 #fff,
+       1px  1px 0 #fff,
+       0 0 8px rgba(255, 255, 255, 0.6),
+       0 0 10px rgba(255, 255, 255, 0.5);
+    animation: fadeIn 1s ease-in-out;
+  
+    @media (max-width: 480px) {
+      font-size: 32px;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    text-align: center;
   }
 `;
 
 const ContactInfo = styled.div`
   text-align: right;
   font-size: 20px;
-  font-weight: bold;
-  color: #00c851; /* Яркий, но не кислотный */
+  color: #00c851;
   text-shadow: 0 0 10px rgba(0, 200, 81, 0.7);
   letter-spacing: 1px;
   padding: 5px 15px;
-  /*background: rgba(255, 255, 255, 0.1); /* Лёгкая подложка для выделения */*/
   border-radius: 8px;
 
   p {
     margin: 5px 0;
   }
-`;
 
+  /* Для мобильных устройств (<480px) */
+  @media (max-width: 480px) {
+    text-align: center;
+  }
 
-const Footer = styled.footer`
-  text-align: center;
-  padding: 20px;
-  background: #333;
-  color: white;
-  margin-top: 40px;
+  /* Для планшетов: город и телефон с логотипом Telegram в одну строку, центрирование */
+  @media (min-width: 481px) and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+      margin: 0 10px;
+    }
+  }
 `;
 
 const Container = styled.div`
   padding: 20px;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Card = styled.div`
@@ -193,6 +225,7 @@ const Card = styled.div`
 const ImageWrapper = styled.div`
   height: 200px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -203,6 +236,7 @@ const Placeholder = styled.div`
   height: 100%;
   background: #eee;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   color: #888;
@@ -214,9 +248,20 @@ const TelegramLogo = styled.img`
   width: 40px;
   margin-left: 10px;
   vertical-align: middle;
-  transition: transform 0.3s ease; // For subtle animation on hover
+  transition: transform 0.3s ease;
   &:hover {
-    transform: scale(1.1); // Slightly enlarge on hover for visual feedback
+    transform: scale(1.1);
+  }
+`;
+
+const WhatsappLogo = styled.img`
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  vertical-align: middle;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
   }
 `;
 
@@ -228,15 +273,13 @@ const StyledLink = styled.a`
 
 const ContactItem = styled.span`
   & > a {
-    transition: transform 0.3s ease, color 0.3s ease; // Transition for both scaling and color change
-    display: inline-block; // Ensure the anchor can be scaled
-    color: #00c851; // Green color for the phone number
+    font-weight: bold;
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    color: #00c851;
 
     &:hover {
-      transform: scale(1.02); // Scale up on hover
-      //color: #009e45; // A darker green on hover for subtle emphasis
+      transform: scale(1.02);
     }
   }
 `;
-
-export default IndexPage;
