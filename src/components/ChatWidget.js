@@ -7,11 +7,6 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
-const slideIn = keyframes`
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-`;
-
 // Styled Components
 const ChatWidgetContainer = styled.div`
   position: fixed;
@@ -34,6 +29,7 @@ const ChatBubble = styled.button`
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   transition: transform 0.2s ease;
+  animation: ${fadeIn} 0.3s ease-out;
 
   &:hover {
     transform: scale(1.1);
@@ -69,6 +65,26 @@ const ChatHeader = styled.div`
   padding: 15px;
   font-weight: bold;
   text-align: center;
+  position: relative; /* For positioning the close button */
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const MessageList = styled.div`
@@ -141,8 +157,6 @@ const ChatWidget = () => {
     }
   }, [messages, isLoading]);
 
-  const toggleChat = () => setIsOpen(!isOpen);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
@@ -179,7 +193,10 @@ const ChatWidget = () => {
     <ChatWidgetContainer>
       {isOpen && (
         <ChatWindow>
-          <ChatHeader>ИИ-Помощник</ChatHeader>
+          <ChatHeader>
+            ИИ-Помощник
+            <CloseButton onClick={() => setIsOpen(false)}>&times;</CloseButton>
+          </ChatHeader>
           <MessageList ref={messageListRef}>
             {messages.map((msg, index) => (
               <Message key={index} sender={msg.sender}>
@@ -199,9 +216,11 @@ const ChatWidget = () => {
           </InputArea>
         </ChatWindow>
       )}
-      <ChatBubble onClick={toggleChat}>
-        {isOpen ? '×' : '💬'}
-      </ChatBubble>
+      {!isOpen && (
+        <ChatBubble onClick={() => setIsOpen(true)}>
+          {'💬'}
+        </ChatBubble>
+      )}
     </ChatWidgetContainer>
   );
 };
