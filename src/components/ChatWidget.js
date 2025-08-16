@@ -167,7 +167,7 @@ const ChatWidget = () => {
     setIsLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch('http://62.60.152.93:3000/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: [...messages, userMessage] }),
