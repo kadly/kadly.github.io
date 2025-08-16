@@ -11,12 +11,13 @@ module.exports = async (req, res) => {
     return res.status(400).json({ message: 'Invalid messages format' });
   }
 
-  const API_KEY = process.env.GEMINI_API_KEY;
+  const API_KEY = process.env.GOOGLE_API_KEY;
   if (!API_KEY) {
-    console.error('GEMINI_API_KEY is not set in .env.development');
+    console.error('GOOGLE_API_KEY is not set in .env.development');
     return res.status(500).json({ message: 'API key not configured' });
   }
 
+  // Using gemini-2.5-flash as requested by user
   const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
   const contents = messages.map(msg => ({
