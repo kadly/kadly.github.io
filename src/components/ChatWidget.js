@@ -66,9 +66,32 @@ const ChatWindow = styled.div`
 const ChatHeader = styled.div`
   background-color: #0088cc;
   color: white;
-  padding: 15px;
+  padding: 0 15px;
   font-weight: bold;
-  text-align: center;
+  position: relative; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  height: 50px; 
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const MessageList = styled.div`
@@ -179,7 +202,10 @@ const ChatWidget = () => {
     <ChatWidgetContainer>
       {isOpen && (
         <ChatWindow>
-          <ChatHeader>ИИ-Помощник</ChatHeader>
+                    <ChatHeader>
+            ИИ-Помощник
+            <CloseButton onClick={() => setIsOpen(false)}>&times;</CloseButton>
+          </ChatHeader>
           <MessageList ref={messageListRef}>
             {messages.map((msg, index) => (
               <Message key={index} sender={msg.sender}>
@@ -199,9 +225,11 @@ const ChatWidget = () => {
           </InputArea>
         </ChatWindow>
       )}
-      <ChatBubble onClick={toggleChat}>
-        {isOpen ? '×' : '💬'}
-      </ChatBubble>
+      {!isOpen && (
+        <ChatBubble onClick={() => setIsOpen(true)}>
+          {'💬'}
+        </ChatBubble>
+      )}
     </ChatWidgetContainer>
   );
 };
