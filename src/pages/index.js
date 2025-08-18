@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { graphql, useStaticQuery } from "gatsby";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Footer from "../components/Footer";
 import YandexMap from "../components/YandexMap";
 
@@ -19,6 +19,30 @@ const categories = [
   { name: "Бульдозеры", image: "bulldozers.png", description: "Тяжелая техника для землеройных работ.", path: "/category/bulldozers" },
   { name: "Фронтальные погрузчики", image: "front-end-loaders.png", description: "Погрузчики для перемещения материалов.", path: "/category/frontendloaders" },
 ];
+
+const TelegramWidget = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://telegram.org/js/telegram-widget.js?22';
+    script.async = true;
+    script.setAttribute('data-telegram-post', 'zoomlionsu/2');
+    script.setAttribute('data-width', '100%');
+
+    const widgetContainer = document.getElementById('telegram-widget-container');
+    if (widgetContainer) {
+      widgetContainer.innerHTML = '';
+      widgetContainer.appendChild(script);
+    }
+
+    return () => {
+      if (widgetContainer && widgetContainer.contains(script)) {
+        widgetContainer.removeChild(script);
+      }
+    };
+  }, []);
+
+  return <div id="telegram-widget-container"></div>;
+};
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -59,26 +83,48 @@ const IndexPage = () => {
           </p>
         </ContactInfo>
       </Header>
-      <Container>
-        <Grid>
-          {categories.map((category) => (
-            <Card key={category.name}>
-              <Link to={category.path}>
-                <ImageWrapper>
-                  {getImageByName(category.image) ? (
-                    <GatsbyImage image={getImageByName(category.image)} alt={category.name} />
-                  ) : (
-                    <Placeholder>No Image</Placeholder>
-                  )}
-                </ImageWrapper>
-                <h3>{category.name}</h3>
-                <p>{category.description}</p>
-              </Link>
-            </Card>
-          ))}
-        </Grid>
-      </Container>
-      <YandexMap />
+      
+      <PageLayout>
+        <LeftSidebar>
+          <h3>Услуги</h3>
+          <ServiceMenu>
+            <li><Link to="/under-construction/">Аренда</Link></li>
+            <li><Link to="/under-construction/">Обслуживание</Link></li>
+            <li><Link to="/under-construction/">Доставка</Link></li>
+          </ServiceMenu>
+        </LeftSidebar>
+
+        <MainContent>
+          <Grid>
+            {categories.map((category) => (
+              <Card key={category.name}>
+                <Link to={category.path}>
+                  <ImageWrapper>
+                    {getImageByName(category.image) ? (
+                      <GatsbyImage image={getImageByName(category.image)} alt={category.name} />
+                    ) : (
+                      <Placeholder>No Image</Placeholder>
+                    )}
+                  </ImageWrapper>
+                  <h3>{category.name}</h3>
+                  <p>{category.description}</p>
+                </Link>
+              </Card>
+            ))}
+          </Grid>
+        </MainContent>
+
+        <RightSidebar>
+          <h3>Новости из Telegram</h3>
+          <TelegramWidget />
+        </RightSidebar>
+
+        <MapContainer>
+          <YandexMap />
+        </MapContainer>
+
+      </PageLayout>
+
       <Footer
         companyName="Зумлион Индустри"
         websiteUrl="https://example.com"
@@ -88,6 +134,99 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
+
+// --- Стили ---
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const PageLayout = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "left main right"
+    ". map .";
+  gap: 30px;
+  padding: 20px;
+  max-width: 1800px;
+  margin: 0 auto;
+  align-items: flex-start;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "main"
+      "left"
+      "right"
+      "map";
+    gap: 15px; // Уменьшаем вертикальный отступ
+    padding: 20px 20px 10px 20px; // Уменьшаем нижний отступ
+  }
+`;
+
+const MainContent = styled.main`
+  grid-area: main;
+`;
+
+const LeftSidebar = styled.aside`
+  grid-area: left;
+  width: 280px;
+  h3 {
+    text-align: center;
+    margin-top: 0;
+  }
+  @media (max-width: 1200px) {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto 0; // Добавляем большой отступ сверху и центрируем
+  }
+`;
+
+const RightSidebar = styled.aside`
+  grid-area: right;
+  width: 320px;
+  h3 {
+    text-align: center;
+    margin-top: 0;
+  }
+  @media (max-width: 1200px) {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto 0; // Убираем нижний отступ
+  }
+`;
+
+const MapContainer = styled.div`
+  grid-area: map;
+`;
+
+const ServiceMenu = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+
+  li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: rgb(164, 206, 78);
+    }
+  }
+`;
 
 const Header = styled.header`
   display: flex;
@@ -126,7 +265,7 @@ const Header = styled.header`
        1px  1px 0 #fff,
        0 0 8px rgba(255, 255, 255, 0.6),
        0 0 10px rgba(255, 255, 255, 0.5);
-    animation: fadeIn 1s ease-in-out;
+    animation: ${fadeIn} 1s ease-in-out;
   
     @media (max-width: 480px) {
       font-size: 32px;
@@ -163,12 +302,10 @@ const ContactInfo = styled.div`
     margin: 5px 0;
   }
 
-  /* Для мобильных устройств (<480px) */
   @media (max-width: 480px) {
     text-align: center;
   }
 
-  /* Для планшетов: город и телефон с логотипом Telegram в одну строку, центрирование */
   @media (min-width: 481px) and (max-width: 768px) {
     display: flex;
     align-items: center;
@@ -179,21 +316,10 @@ const ContactInfo = styled.div`
   }
 `;
 
-const Container = styled.div`
-  padding: 20px;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-`;
-
 const Grid = styled.div`
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
 `;
 
 const Card = styled.div`

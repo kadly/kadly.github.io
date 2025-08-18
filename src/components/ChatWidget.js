@@ -7,11 +7,6 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
-const slideIn = keyframes`
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-`;
-
 // Styled Components
 const ChatWidgetContainer = styled.div`
   position: fixed;
@@ -163,8 +158,6 @@ const ChatWidget = () => {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
   }, [messages, isLoading]);
-
-  const toggleChat = () => setIsOpen(!isOpen);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

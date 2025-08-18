@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { graphql } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
 import ModalContact from '../../components/ModalContact';
 import ModelCard from '../../components/ModelCard';
 import Header, { Head as HeaderHead } from '../../components/Header';
 import Footer from '../../components/Footer';
 import { Layout, Container, Grid, Subtitle } from '../../components/LayoutComponents';
+
 
 const BulldozersPage = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
