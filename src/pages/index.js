@@ -25,7 +25,7 @@ const TelegramWidget = () => {
     const script = document.createElement('script');
     script.src = 'https://telegram.org/js/telegram-widget.js?22';
     script.async = true;
-    script.setAttribute('data-telegram-post', 'zoomlionsu/2');
+    script.setAttribute('data-telegram-post', 'zoomlionsu/4');
     script.setAttribute('data-width', '100%');
 
     const widgetContainer = document.getElementById('telegram-widget-container');
