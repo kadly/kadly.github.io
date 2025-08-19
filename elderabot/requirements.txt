@@ -1,9 +1,0 @@
-aiogram
-google-generativeai
-python-dotenv
-Pillow
-numpy
-chromadb
-pypdf2
-aiohttp
-llama-index-core
