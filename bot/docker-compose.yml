@@ -1,0 +1,16 @@
+services:
+  bot:
+    # Собираем образ из Dockerfile в текущей папке
+    build: .
+    container_name: bot_backend
+    
+    # Подключаем файл с вашим API-ключом
+    env_file:
+      - .env
+      
+    # Перезапускаем контейнер, если он упадет
+    restart: unless-stopped
+
+    # Пробрасываем порт 8000 из контейнера на хост-машину (VPS)
+    ports:
+      - "8000:8000"
