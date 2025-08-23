@@ -88,8 +88,9 @@ const IndexPage = () => {
         <LeftSidebar>
           <h3>Услуги</h3>
           <ServiceMenu>
+            <li><Link to="/under-construction/">Сервисное обслуживание</Link></li>
             <li><Link to="/under-construction/">Аренда</Link></li>
-            <li><Link to="/under-construction/">Обслуживание</Link></li>
+            <li><Link to="/under-construction/">Лизинг</Link></li>
             <li><Link to="/under-construction/">Доставка</Link></li>
           </ServiceMenu>
         </LeftSidebar>
