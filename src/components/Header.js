@@ -194,7 +194,7 @@ const Header = ({ centerText }) => {
       <RightContainer>
         <ContactInfo>
           <City>г. Новосибирск</City>
-          <Phone href="tel:+7-923-708-22-54">+7-923-708-22-54</Phone>
+          <Phone href="tel:+79133777508">+7-913-377-75-08</Phone>
           <div>
             <TelegramLink
               href="https://t.me/gmitry"

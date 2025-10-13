@@ -5,6 +5,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import styled, { keyframes } from "styled-components";
 import Footer from "../components/Footer";
 import YandexMap from "../components/YandexMap";
+import ImageSlider from "../components/ImageSlider";
 
 const categories = [
   { name: "Автокраны", image: "autocranes.png", description: "Мобильные краны для строительства.", path: "/category/autocranes" },
@@ -55,6 +56,20 @@ const IndexPage = () => {
           }
         }
       }
+      galleryImages: allFile(
+        filter: {
+          sourceInstanceName: { eq: "images" }
+          relativeDirectory: { eq: "gallery" }
+        }
+      ) {
+        edges {
+          node {
+            childImageSharp {
+              gatsbyImageData(layout: CONSTRAINED, width: 800)
+            }
+          }
+        }
+      }
     }
   `);
 
@@ -69,17 +84,14 @@ const IndexPage = () => {
         <h1>Краны и спецтехника</h1>
         <h2>Zoomlion</h2>
         <ContactInfo>
-          <p>г. Новосибирск</p>
           <p>
-            <ContactItem>
-              <a href="tel:+7-923-708-22-54">+7-923-708-22-54</a>
-            </ContactItem>
             <StyledLink href="https://t.me/gmitry">
               <TelegramLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png" alt="Telegram logo" />
             </StyledLink>
-            <StyledLink href="https://wa.me/79237082254" target="_blank" rel="noopener noreferrer">
+            <StyledLink href="https://wa.me/79133777508" target="_blank" rel="noopener noreferrer">
               <WhatsappLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" alt="WhatsApp logo" />
             </StyledLink>
+            <span style={{ marginLeft: '15px', verticalAlign: 'middle' }}>г. Новосибирск</span>
           </p>
         </ContactInfo>
       </Header>
@@ -93,6 +105,10 @@ const IndexPage = () => {
             <li><Link to="/under-construction/">Лизинг</Link></li>
             <li><Link to="/under-construction/">Доставка</Link></li>
           </ServiceMenu>
+          <DesktopCarouselContainer>
+            <h3>Фото площадки</h3>
+            <ImageSlider images={data.galleryImages.edges} />
+          </DesktopCarouselContainer>
         </LeftSidebar>
 
         <MainContent>
@@ -116,11 +132,25 @@ const IndexPage = () => {
         </MainContent>
 
         <RightSidebar>
+          <ContactsBlock>
+            <h3>Контакты</h3>
+            <ContactList>
+              <li><a href="tel:+7-383-380-71-28">+7-383-380-71-28</a></li>
+              <li><a href="tel:+7-913-377-75-08">+7-913-377-75-08</a></li>
+              <li><a href="mailto:zoomlionsib@yandex.ru">zoomlionsib@yandex.ru</a></li>
+            </ContactList>
+          </ContactsBlock>
           <h3>Новости из Telegram</h3>
           <TelegramWidget />
         </RightSidebar>
 
+        <MobileCarouselContainer>
+          <h3>Фото площадки</h3>
+          <ImageSlider images={data.galleryImages.edges} />
+        </MobileCarouselContainer>
+
         <MapContainer>
+          <h3>Местоположение</h3>
           <YandexMap />
         </MapContainer>
 
@@ -137,6 +167,22 @@ const IndexPage = () => {
 export default IndexPage;
 
 // --- Стили ---
+
+const DesktopCarouselContainer = styled.div`
+  margin-top: 20px;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`;
+
+const MobileCarouselContainer = styled.div`
+  grid-area: mobile-carousel;
+  display: none;
+  @media (max-width: 1200px) {
+    display: block;
+    margin-bottom: 20px;
+  }
+`;
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -161,6 +207,7 @@ const PageLayout = styled.div`
       "main"
       "left"
       "right"
+      "mobile-carousel"
       "map";
     gap: 15px; // Уменьшаем вертикальный отступ
     padding: 20px 20px 10px 20px; // Уменьшаем нижний отступ
@@ -185,6 +232,37 @@ const LeftSidebar = styled.aside`
   }
 `;
 
+const ContactsBlock = styled.div`
+  margin-bottom: 30px;
+`;
+
+const ContactList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+
+  li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    &:first-child {
+      border-top: 1px solid #ddd;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: rgb(164, 206, 78);
+    }
+  }
+`;
+
 const RightSidebar = styled.aside`
   grid-area: right;
   width: 320px;
@@ -201,6 +279,9 @@ const RightSidebar = styled.aside`
 
 const MapContainer = styled.div`
   grid-area: map;
+  h3 {
+    text-align: center;
+  }
 `;
 
 const ServiceMenu = styled.ul`
