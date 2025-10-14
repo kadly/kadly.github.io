@@ -105,10 +105,10 @@ const IndexPage = () => {
             <li><Link to="/under-construction/">Лизинг</Link></li>
             <li><Link to="/under-construction/">Доставка</Link></li>
           </ServiceMenu>
-          <DesktopCarouselContainer>
+          <CarouselContainer>
             <h3>Фото площадки</h3>
             <ImageSlider images={data.galleryImages.edges} />
-          </DesktopCarouselContainer>
+          </CarouselContainer>
         </LeftSidebar>
 
         <MainContent>
@@ -144,11 +144,6 @@ const IndexPage = () => {
           <TelegramWidget />
         </RightSidebar>
 
-        <MobileCarouselContainer>
-          <h3>Фото площадки</h3>
-          <ImageSlider images={data.galleryImages.edges} />
-        </MobileCarouselContainer>
-
         <MapContainer>
           <h3>Местоположение</h3>
           <YandexMap />
@@ -168,19 +163,14 @@ export default IndexPage;
 
 // --- Стили ---
 
-const DesktopCarouselContainer = styled.div`
+const CarouselContainer = styled.div`
   margin-top: 20px;
+  
   @media (max-width: 1200px) {
-    display: none;
-  }
-`;
-
-const MobileCarouselContainer = styled.div`
-  grid-area: mobile-carousel;
-  display: none;
-  @media (max-width: 1200px) {
-    display: block;
-    margin-bottom: 20px;
+    order: 2; // На мобильных устройствах отправляем карусель вниз
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto 0;
   }
 `;
 
@@ -205,12 +195,11 @@ const PageLayout = styled.div`
     grid-template-columns: 1fr;
     grid-template-areas:
       "main"
-      "left"
+      "left" // Эта область теперь будет содержать и меню, и карусель
       "right"
-      "mobile-carousel"
       "map";
-    gap: 15px; // Уменьшаем вертикальный отступ
-    padding: 20px 20px 10px 20px; // Уменьшаем нижний отступ
+    gap: 15px;
+    padding: 20px 20px 10px 20px;
   }
 `;
 
@@ -221,14 +210,17 @@ const MainContent = styled.main`
 const LeftSidebar = styled.aside`
   grid-area: left;
   width: 280px;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   h3 {
     text-align: center;
     margin-top: 0;
-  }
-  @media (max-width: 1200px) {
-    width: 100%;
-    max-width: 500px;
-    margin: 20px auto 0; // Добавляем большой отступ сверху и центрируем
   }
 `;
 
