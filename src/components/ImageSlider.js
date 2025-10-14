@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const SliderWrapper = styled.div`
+  overflow: hidden; // Предотвращаем выход контента за пределы контейнера
   .slick-prev:before,
   .slick-next:before {
     color: black; // Делаем стрелки видимыми на светлом фоне
