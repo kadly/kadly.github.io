@@ -8,7 +8,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const SliderWrapper = styled.div`
+  width: 100%;
   overflow: hidden; // Предотвращаем выход контента за пределы контейнера
+
+  .slick-slider,
+  .slick-list,
+  .slick-track {
+    width: 100%;
+  }
+
+  .slick-slide > div {
+    width: 100%;
+  }
+
   .slick-prev:before,
   .slick-next:before {
     color: black; // Делаем стрелки видимыми на светлом фоне

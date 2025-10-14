@@ -65,7 +65,7 @@ const IndexPage = () => {
         edges {
           node {
             childImageSharp {
-              gatsbyImageData(layout: CONSTRAINED, width: 800)
+              gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, formats: [AUTO, WEBP])
             }
           }
         }
