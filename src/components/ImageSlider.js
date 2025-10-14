@@ -9,12 +9,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 const SliderWrapper = styled.div`
   width: 100%;
-  overflow: hidden; // Предотвращаем выход контента за пределы контейнера
+  max-width: 100vw; /* Жестко ограничиваем максимальную ширину размером экрана */
+  overflow: hidden;
 
   .slick-slider,
   .slick-list,
   .slick-track {
-    width: 100%;
+    width: 100% !important; /* !important для переопределения инлайн-стилей JS */
   }
 
   .slick-slide > div {
