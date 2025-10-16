@@ -9,11 +9,17 @@ import "slick-carousel/slick/slick-theme.css";
 
 const SliderWrapper = styled.div`
   width: 100%;
-  overflow: hidden; /* Предотвращаем выход контента за пределы контейнера */
+  overflow: hidden; /* Финальная страховка от переполнения */
 
-  .slick-prev:before,
-  .slick-next:before {
-    color: black; // Делаем стрелки видимыми на светлом фоне
+  .slick-slide > div {
+    /* Заставляем контейнер слайда центрировать изображение */
+    display: flex;
+    justify-content: center;
+  }
+
+  .gatsby-image-wrapper {
+    /* Заставляем изображение занимать 100% ширины контейнера */
+    width: 100%;
   }
 `;
 
