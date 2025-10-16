@@ -97,6 +97,9 @@ const IndexPage = () => {
       
       <PageLayout>
         <LeftSidebar>
+          <CarouselContainer>
+            <ImageSlider images={data.galleryImages.edges} />
+          </CarouselContainer>
           <h3>Услуги</h3>
           <ServiceMenu>
             <li><Link to="/under-construction/">Сервисное обслуживание</Link></li>
@@ -104,10 +107,6 @@ const IndexPage = () => {
             <li><Link to="/under-construction/">Лизинг</Link></li>
             <li><Link to="/under-construction/">Доставка</Link></li>
           </ServiceMenu>
-          <CarouselContainer>
-            <h3>Фото площадки</h3>
-            <ImageSlider images={data.galleryImages.edges} />
-          </CarouselContainer>
         </LeftSidebar>
 
         <MainContent>
@@ -163,8 +162,6 @@ export default IndexPage;
 // --- Стили ---
 
 const CarouselContainer = styled.div`
-  margin-top: 20px;
-  
   @media (max-width: 1200px) {
     display: none; // Скрываем карусель на мобильных устройствах
   }
@@ -216,7 +213,7 @@ const LeftSidebar = styled.aside`
 
   h3 {
     text-align: center;
-    margin-top: 0;
+    margin-top: 30px;
   }
 `;
 
