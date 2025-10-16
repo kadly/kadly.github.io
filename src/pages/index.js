@@ -167,10 +167,7 @@ const CarouselContainer = styled.div`
   margin-top: 20px;
   
   @media (max-width: 1200px) {
-    order: 2; // На мобильных устройствах отправляем карусель вниз
-    width: 100%;
-    max-width: 500px;
-    margin: 20px auto 0;
+    display: none; // Скрываем карусель на мобильных устройствах
   }
 `;
 
