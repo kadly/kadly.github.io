@@ -91,7 +91,6 @@ const IndexPage = () => {
             <StyledLink href="https://wa.me/79133777508" target="_blank" rel="noopener noreferrer">
               <WhatsappLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" alt="WhatsApp logo" />
             </StyledLink>
-            <span style={{ marginLeft: '15px', verticalAlign: 'middle' }}>г. Новосибирск</span>
           </p>
         </ContactInfo>
       </Header>
