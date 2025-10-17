@@ -1,0 +1,33 @@
+# Основные библиотеки для RAG
+langchain
+langchain-community
+langchain-google-genai
+langchain-huggingface
+langchain-chroma
+
+# Для чтения PDF файлов
+pypdf
+
+# Для чтения DOC/DOCX файлов
+python-docx
+
+# Для "умного" парсинга PDF и DOCX
+unstructured
+unstructured-pytesseract
+pikepdf
+python-magic-bin
+pdfminer.six
+Pillow
+unstructured_inference
+pdf2image
+
+# Векторная база данных
+chromadb
+
+
+# Модели эмбеддингов от сообщества
+sentence-transformers
+
+# Для работы с .env файлами
+python-dotenv
+

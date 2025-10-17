@@ -1,0 +1,19 @@
+fastapi
+uvicorn
+python-dotenv
+langchain-google-genai
+langchain-chroma
+langchain-huggingface
+langchain
+pydantic<2
+unstructured
+# Зависимости ниже нужны для unstructured, чтобы работать с PDF
+pdf2image
+pdfminer.six
+pikepdf
+pypdf
+lxml
+libmagic
+python-magic
+tesseract
+poppler-utils

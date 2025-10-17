@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  bot:
+    build: .
+    container_name: zoomlion_bot_old
+    restart: always
+    ports:
+      - "8001:8000" # Используем другой порт (8001), чтобы не конфликтовать с новым ботом
+    volumes:
+      - ./db:/app/db:ro # монтируем базу только для чтения
+      - ./.env:/app/.env
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
