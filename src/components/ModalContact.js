@@ -85,10 +85,10 @@ const ModalContact = ({ isOpen, onClose, ModelComponent }) => {
         <h2>Связаться с продавцом</h2>
         <IconsContainer>
           <a href="https://telegram.me/gmitry" target="_blank" rel="noopener noreferrer">
-            <Icon src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" />
+            <Icon src="/icons/telegram.svg" alt="Telegram" />
           </a>
           <a href="https://wa.me/79133777508" target="_blank" rel="noopener noreferrer">
-            <Icon src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+            <Icon src="/icons/whatsapp.svg" alt="WhatsApp" />
           </a>
         </IconsContainer>
         <ModelText>

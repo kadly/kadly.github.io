@@ -86,10 +86,10 @@ const IndexPage = () => {
         <ContactInfo>
           <p>
             <StyledLink href="https://t.me/gmitry">
-              <TelegramLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png" alt="Telegram logo" />
+              <TelegramLogo src="/icons/telegram.svg" alt="Telegram" />
             </StyledLink>
             <StyledLink href="https://wa.me/79133777508" target="_blank" rel="noopener noreferrer">
-              <WhatsappLogo src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" alt="WhatsApp logo" />
+              <WhatsappLogo src="/icons/whatsapp.svg" alt="WhatsApp" />
             </StyledLink>
           </p>
         </ContactInfo>
